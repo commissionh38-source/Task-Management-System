@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            text-align: center;
+        }
+
+        .container {
+            width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .top-bar {
+            text-align: right;
+            margin: 10px;
+        }
+
+        .logout {
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <span>Welcome, {{ session['user'] }}</span>
+    <a href="/logout" class="logout">Logout</a>
+</div>
+
+<div class="container">
+    <h2>Edit Task</h2>
+
+    <form method="POST">
+        <input type="text" name="task" value="{{ task[1] }}" required>
+
+        <select name="priority">
+            <option {% if task[3]=='High' %}selected{% endif %}>High</option>
+            <option {% if task[3]=='Medium' %}selected{% endif %}>Medium</option>
+            <option {% if task[3]=='Low' %}selected{% endif %}>Low</option>
+        </select>
+
+        <input type="date" name="due_date" value="{{ task[4] }}">
+
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="/" class="back">← Back to Tasks</a>
+</div>
+
+</body>
+</html>
